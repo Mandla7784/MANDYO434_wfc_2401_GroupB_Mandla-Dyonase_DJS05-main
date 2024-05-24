@@ -20,6 +20,10 @@ function reducer(state = initialState, action) {
         ...state,
         value: state.value,
       };
+    default:
+      return {
+        state,
+      };
   }
 }
 
