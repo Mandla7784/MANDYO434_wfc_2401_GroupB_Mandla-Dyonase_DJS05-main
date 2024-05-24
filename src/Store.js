@@ -1,3 +1,3 @@
-import { createStore } from "./src/createStore";
-import { reducer } from "./src/reducer.js";
+import { createStore } from "./createStore";
+import { reducer } from "./reducer.js";
 export const store = createStore(reducer);

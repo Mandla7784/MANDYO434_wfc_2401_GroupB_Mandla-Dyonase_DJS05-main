@@ -1,3 +1,3 @@
-import { store } from "./src/Store.js";
+import { store } from "./Store.js";
 
 console.log(store.getState());
