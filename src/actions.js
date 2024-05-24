@@ -5,7 +5,7 @@ const myTypes = {
   RESET: "RESET",
 };
 
-const { ADD, MINUS, RESET } = myTypes;
+export const { ADD, MINUS, RESET } = myTypes;
 //action creater...
 export const incrementingState = () => ({
   type: ADD,

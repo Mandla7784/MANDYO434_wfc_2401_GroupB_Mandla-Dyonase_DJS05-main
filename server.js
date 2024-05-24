@@ -37,6 +37,7 @@ const server = http.createServer((req, res) => {
         res.end(
           "Sorry, check with the site admin for error: " + error.code + " ..\n"
         );
+
         res.end();
       }
     } else {
