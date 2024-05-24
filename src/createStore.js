@@ -1,36 +1,26 @@
-import { ADD, MINUS, RESET } from "./actions.js";
+// Define the type of action
+export const ADD = "ADD";
+export const SUBTRACT = "SUBTRACT";
+export const RESET = "RESET";
 
-//initializing state as an object of value property
-const initialState = { value: 0 };
-//function for reducing state
-function reducer(state = initialState, action) {
+export const initialState = { count: 0 };
+
+export function counterReducer(state = initialState, action) {
   switch (action.type) {
     case ADD:
-      return {
-        ...state,
-        value: state.value + 1,
-      };
-    case MINUS:
-      return {
-        ...state,
-        value: state.value - 1,
-      };
+      return { count: state.count + 2 };
+    case SUBTRACT:
+      return { count: state.count - 1 };
     case RESET:
-      return {
-        ...state,
-        value: state.value,
-      };
+      return { count: 0 };
     default:
-      return {
-        state,
-      };
+      return state;
   }
 }
 
-//function to create the store..
-export function createStore(reducer) {
-  let state;
-  let listeners = [];
+export function createStore(reducer, initialState) {
+  let state = initialState;
+  const listeners = [];
 
   const getState = () => state;
 
@@ -42,18 +32,12 @@ export function createStore(reducer) {
   const subscribe = (listener) => {
     listeners.push(listener);
     return () => {
-      listeners = listeners.filter((l) => l !== listener);
+      const index = listeners.indexOf(listener);
+      if (index !== -1) {
+        listeners.splice(index, 1);
+      }
     };
   };
 
-  // Initialize the state by dispatching a dummy action
-  dispatch({ type: "Mandla" });
-
-  return {
-    getState,
-    dispatch,
-    subscribe,
-  };
+  return { getState, dispatch, subscribe };
 }
-
-export const store = createStore(reducer);

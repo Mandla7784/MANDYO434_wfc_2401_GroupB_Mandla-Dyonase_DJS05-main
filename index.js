@@ -1,23 +1,27 @@
 import {
-  incrementingState,
-  decrementingSate,
-  resetingSate,
-} from "./src/actions.js";
-import { store } from "./src/createStore.js";
-store.subscribe(() => {
-  console.log(store.getState());
-});
+  createStore,
+  counterReducer,
+  initialState,
+  ADD,
+  SUBTRACT,
+  RESET,
+} from "./src/createStore.js";
+
+// Create the store with the reducer and initial state
+
+const store = createStore(counterReducer, initialState);
 
 // Subscribe to store updates
-store.subscribe(() => {
-  console.log("Store changed:", store.getState());
-});
+store.subscribe(() => console.log("State:", JSON.stringify(store.getState())));
 
-// Dispatch actions to modify the state
-store.dispatch(incrementingState());
-store.dispatch(incrementingState());
-store.dispatch(decrementingSate());
-store.dispatch(resetingSate());
+// Initial State Verification
+console.log("Initial State:", JSON.stringify(store.getState())); // Should log { count: 0 }
 
-// Log the final state
-console.log("Final state:", store.getState());
+// Incrementing the Counter
+store.dispatch({ type: ADD });
+
+// Decrementing the Counter
+store.dispatch({ type: SUBTRACT });
+
+// Resetting the Counter
+store.dispatch({ type: RESET });
